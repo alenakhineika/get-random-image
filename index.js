@@ -46,6 +46,4 @@ const run = () => {
   });
 };
 
-module.exports.handler = async () => {
-  return await run();
-};
+module.exports.handler = run;
