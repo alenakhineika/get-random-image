@@ -6,43 +6,50 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-const SOURCE_IMAGE = `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_ACCESS_KEY}`;
+const SOURCE_ENDPOINT = 'https://api.unsplash.com/photos/random?client_id=';
+const SOURCE_URL = `${SOURCE_ENDPOINT}${process.env.UNSPLASH_ACCESS_KEY}`;
 
 const run = () => {
-  return new Promise(async (resolve) => {
+  return new Promise(async (resolve, reject) => {
     console.log('Lambda called');
-    console.log(`Fetch json with image data from ${SOURCE_IMAGE}`);
 
     let imageData = {};
+    console.log(`Fetch image json from ${SOURCE_ENDPOINT}UNSPLASH_ACCESS_KEY`);
 
     try {
       imageData = await axios
-        .get(SOURCE_IMAGE, { responseType: 'arraybuffer' })
+        .get(SOURCE_URL, { responseType: 'arraybuffer' })
         .then((response) => JSON.parse(Buffer.from(response.data, 'binary').toString()));
+      console.log('Image json successfully fetched');
     } catch (error) {
-      console.error('Error fetching data from unsplash', error);
-      return resolve(false);
+      console.error('Error fetching image json', error);
+      return reject(error);
     }
 
     if (!imageData.urls || !imageData.urls.small) {
-      console.error('Small image url is missing in unsplash json');
-      return resolve(false);
+      const error = 'Small image url is missing in unsplash json';
+      console.error(error);
+      return reject(new Error(error));
     }
 
-    console.log(`Fetch image from ${imageData.urls.small}`);
-    
-    const imageBase64 = await axios.get(
-      imageData.urls.small,
-      { responseType: 'arraybuffer' }
-    ).then((response) => Buffer.from(response.data, 'binary').toString('base64'));
-    console.log('Image successfully fetched');
+    let imageBase64 = '';
+    console.log(`Fetch a small image from ${imageData.urls.small}`);
+
+    try {
+      imageBase64 = await axios
+        .get(imageData.urls.small, { responseType: 'arraybuffer' })
+        .then((response) => Buffer.from(response.data, 'binary').toString('base64'));
+      console.log('A small image successfully fetched');
+    } catch (error) {
+      console.error('Error fetching a small image', error);
+      return reject(error);
+    }
 
     const response = {
       statusCode: 200,
       body: imageBase64,
       isBase64Encoded: true
     };
-
     console.log(`Response: ${JSON.stringify(response, null, 2)}`);
 
     return resolve(response);

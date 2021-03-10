@@ -32,9 +32,9 @@ Call the lambda handler.
 
 ## Run with AWS Lambda
 
-AWS will call `handler` automatically after you configure the lambda function:
+AWS will call `handler` automatically after you create your Lambda:
 - Create a lambda function.
 - Add environment variables to the `Environment variables` Lambda Configuration section.
 - Upload `code.zip` directly to the lambda function or to Amazon S3 if a zip file size is bigger than 10 MB. Note, that the total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB.
-- Change the amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds, make it 20 seconds to make sure there is enough time to create a canvas and write to a database.
+- Change the amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds, make it 20 seconds to make sure there is enough time to download the image and convert it to base64 string.
 - Configure Amazon API Gateway.
