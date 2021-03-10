@@ -1,6 +1,6 @@
 # Get Random Image
 
-The `Get Random Image` project is an AWS serverless application that fetches random images using [Unsplash random image API](https://unsplash.com/documentation#get-a-random-photo) and returns a `base64` image instead of a JSON response with a list of image URLs.
+The `Get Random Image` project is an AWS serverless application that fetches random images using [Unsplash random image API](https://unsplash.com/documentation#get-a-random-photo) and returns a `base64` string instead of a JSON response object.
 
 ## Install
 
@@ -21,7 +21,7 @@ You can create lambda functions directly on the AWS console but if your function
 
 In the project root directory create the `.env` file from the `.env.example` file and set all required values:
 
-- SOURCE_IMAGE - `https://api.unsplash.com/photos/random?client_id=YOUR_ACCESS_KEY`. You can find [YOUR_ACCESS_KEY](https://unsplash.com/documentation#authorization) in user settings.
+- UNSPLASH_ACCESS_KEY - You can find [YOUR_ACCESS_KEY](https://unsplash.com/documentation#authorization) in user settings.
 - NODE_ENV - Use `development` or nothing for the local setup and use `production` for AWS Labmbda.
 
 Call the lambda handler.

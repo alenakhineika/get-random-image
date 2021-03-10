@@ -6,18 +6,19 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+const SOURCE_IMAGE = `https://api.unsplash.com/photos/random?client_id=${process.env.UNSPLASH_ACCESS_KEY}`;
+
 const run = () => {
   return new Promise(async (resolve) => {
     console.log('Lambda called');
-    console.log('Fetch json with image data from https://api.unsplash.com/photos/random?client_id=YOUR_ACCESS_KEY');
+    console.log(`Fetch json with image data from ${SOURCE_IMAGE}`);
 
     let imageData = {};
 
     try {
-      imageData = await axios.get(
-        process.env.SOURCE_IMAGE,
-        { responseType: 'arraybuffer' }
-      ).then((response) => JSON.parse(Buffer.from(response.data, 'binary').toString()));
+      imageData = await axios
+        .get(SOURCE_IMAGE, { responseType: 'arraybuffer' })
+        .then((response) => JSON.parse(Buffer.from(response.data, 'binary').toString()));
     } catch (error) {
       console.error('Error fetching data from unsplash', error);
       return resolve(false);
@@ -41,6 +42,8 @@ const run = () => {
       body: imageBase64,
       isBase64Encoded: true
     };
+
+    console.log(`Response: ${JSON.stringify(response, null, 2)}`);
 
     return resolve(response);
   });
