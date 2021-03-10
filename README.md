@@ -22,7 +22,7 @@ You can create lambda functions directly on the AWS console but if your function
 In the project root directory create the `.env` file from the `.env.example` file and set all required values:
 
 - UNSPLASH_ACCESS_KEY - You can find [YOUR_ACCESS_KEY](https://unsplash.com/documentation#authorization) in user settings.
-- NODE_ENV - Use `development` or nothing for the local setup and use `production` for AWS Labmbda.
+- NODE_ENV - Use `development` or nothing for the local setup and use `production` for AWS Lambda.
 
 Call the lambda handler.
 
