@@ -34,12 +34,15 @@ const run = () => {
       imageData.urls.small,
       { responseType: 'arraybuffer' }
     ).then((response) => Buffer.from(response.data, 'binary').toString('base64'));
+    console.log('Image successfully fetched');
 
-    return resolve({
+    const response = {
       statusCode: 200,
       body: imageBase64,
       isBase64Encoded: true
-    });
+    };
+
+    return resolve(response);
   });
 };
 
