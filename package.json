@@ -1,0 +1,12 @@
+{
+  "name": "get-random-image",
+  "version": "1.0.0",
+  "description": "Get random image from unsplash",
+  "main": "index.js",
+  "author": "Alena Khineika <alena.khineika@gmail.com> (https://github.com/alenakhineika)",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "dotenv": "^8.2.0"
+  }
+}
