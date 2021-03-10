@@ -1,6 +1,6 @@
 # Get Random Image
 
-The `Get Random Image` project is an AWS serverless application that fetches random images using [Unsplash random image API](https://unsplash.com/documentation#get-a-random-photo) and returns a `base64` string instead of a JSON response object.
+The `Get Random Image` project is an AWS serverless application that fetches random images using [Unsplash random image API](https://unsplash.com/documentation#get-a-random-photo) and returns a binary image instead of a JSON response object.
 
 ## Install
 
@@ -21,7 +21,7 @@ You can create lambda functions directly on the AWS console but if your function
 
 In the project root directory create the `.env` file from the `.env.example` file and set all required values:
 
-- UNSPLASH_ACCESS_KEY - You can find [YOUR_ACCESS_KEY](https://unsplash.com/documentation#authorization) in user settings.
+- UNSPLASH_ACCESS_KEY - You can find [YOUR_ACCESS_KEY](https://unsplash.com/documentation#authorization) in your unsplash account settings.
 - NODE_ENV - Use `development` or nothing for the local setup and use `production` for AWS Lambda.
 
 Call the lambda handler.
@@ -32,9 +32,9 @@ Call the lambda handler.
 
 ## Run with AWS Lambda
 
-AWS will call `handler` automatically after you create your Lambda:
+Configure Lambda and AWS will call the `handler` automatically:
 - Create a lambda function.
+- Upload `code.zip` directly to the lambda function or to Amazon S3 if a zip file size is bigger than 10 MB.
 - Add environment variables to the `Environment variables` Lambda Configuration section.
-- Upload `code.zip` directly to the lambda function or to Amazon S3 if a zip file size is bigger than 10 MB. Note, that the total unzipped size of the function and all layers can't exceed the unzipped deployment package size limit of 250 MB.
-- Change the amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds, make it 20 seconds to make sure there is enough time to download the image and convert it to base64 string.
+- Change the amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds, make it 20 seconds to make sure there is enough time to download the image and format the response.
 - Configure Amazon API Gateway.
