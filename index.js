@@ -47,8 +47,8 @@ const run = () => {
 
     const response = {
       statusCode: 200,
-      body: imageBase64,
-      isBase64Encoded: true
+      isBase64Encoded: true,
+      body: imageBase64
     };
     console.log(`Response: ${JSON.stringify(response, null, 2)}`);
 
