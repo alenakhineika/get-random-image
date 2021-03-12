@@ -42,7 +42,7 @@ You have to complete the following stages in order to serve images with Lambda:
 - Create Amazon REST API Gateway.
 - Add a new resource and the GET method to API.
 - Bind the method to the Lambda function.
-- Change the method response to `image/jpeg`.
-- Add */* binary media types to your API settings.
-- Use AWS Shell to set the `contentHandling` property of the `IntegrationResponse` resource to `CONVERT_TO_BINARY`.
+- Change the method response to `'image/jpeg'`.
+- Add `*/*` binary media types to your API settings.
+- Use AWS Shell to set the `'contentHandling'` property of the `'IntegrationResponse'` resource to `'CONVERT_TO_BINARY'`.
 - Deploy REST API.
