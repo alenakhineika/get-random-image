@@ -21,12 +21,12 @@ You can write Lambda functions directly in the AWS code editor but if your funct
 
 ## Run locally
 
-In the project root directory create the `.env` file from the `.env.example` file and set all required values:
+In the project root directory create the `.env` file from the `.env.example` file and set all required environment variables:
 
 - UNSPLASH_ACCESS_KEY - You can find [YOUR_ACCESS_KEY](https://unsplash.com/documentation#authorization) in the unsplash account settings.
 - NODE_ENV - Use `development` or nothing on your local machine and use `production` on AWS.
 
-Call the Lambda handler.
+Call the Lambda handler:
 
 ```
 > node -e 'require("./index.js").handler()'
